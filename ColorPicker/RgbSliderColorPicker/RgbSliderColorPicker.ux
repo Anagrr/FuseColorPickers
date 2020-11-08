@@ -1,0 +1,13 @@
+<Panel ux:Class="RgbSliderColorPicker" Model="RgbSliderColorPicker/RgbSliderColorPicker">
+    <float4 ux:Property="Value" />
+    <string ux:Property="ValueString" />
+
+    <StackPanel Alignment="Center" Width="90%" ItemSpacing="20" Padding="0,0,0,20">
+        <Rectangle CornerRadius="10" Color="White" Layer="Background"/>
+        
+        <CP.HexColorDisplay HexColor="{hexRGB}" HexColorString="{hexRGB}"/>
+        <CP.Slider ColorLetter="R" MaxValue="255" Value="{R}" StartColor="{gradientR.start}" EndColor="{gradientR.end}" ValueChanged="{valueChanged}"/>
+        <CP.Slider ColorLetter="G" MaxValue="255" Value="{G}" StartColor="{gradientG.start}" EndColor="{gradientG.end}" ValueChanged="{valueChanged}"/>
+        <CP.Slider ColorLetter="B" MaxValue="255" Value="{B}" StartColor="{gradientB.start}" EndColor="{gradientB.end}" ValueChanged="{valueChanged}"/>
+    </StackPanel>
+</Panel>

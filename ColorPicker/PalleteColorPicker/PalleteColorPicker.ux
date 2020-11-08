@@ -1,0 +1,188 @@
+<Panel ux:Class="PalleteColorPicker" Model="./PalleteColorPicker/PalleteColorPicker">
+    <StackPanel Alignment="Center" Width="90%" ItemSpacing="15">
+        <JavaScript>
+            var Observable = require("FuseJS/Observable");
+                
+            var colorPositionX = Observable(230);
+            var colorPositionY = Observable(0);
+            var actualHexColor = Observable("#ff0000");
+            var actualHexColorOutput = Observable("#ff0000");
+            var actualColorNumberHSV = Observable(0);
+            var actualSValue = Observable(100);
+            var actualLValue = Observable(100);
+            
+            function clickedColor(args) { 
+                    var circlevalue = (15/2);
+                    colorPositionY.value  = args.localY - circlevalue;
+                    colorPositionX.value  = args.localX - circlevalue;
+                    console.log(args.localX + " - " + colorPositionX.value + " - " + circlevalue);
+                    if(args.localX>240){colorPositionX.value = 230;}else if(args.localX<10){colorPositionX.value = -7.5;}
+                    if(args.localY>240){colorPositionY.value = 230;}else if(args.localY<10){colorPositionY.value = -7.5;}
+                    actualSValue.value = ( Math.round((colorPositionX.value * 100) / 230));
+                    actualLValue.value = (100 - Math.round((colorPositionY.value * 100) / 230));
+            console.log(colorPositionX.value);
+                actualHexColorOutput.value = "#" + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, actualSValue.value, actualLValue.value)[0]) + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, actualSValue.value, actualLValue.value)[1]) + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, actualSValue.value, actualLValue.value)[2]);
+                    
+            };
+            
+            function hexStringValue(number) {
+                    let color = number < 16 ? "0" + number.toString(16) : number.toString(16); 
+                    return color;
+                }
+            function changeColorHSV() {
+                actualHexColorOutput.value = "#" + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, actualSValue.value, actualLValue.value)[0]) + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, actualSValue.value, actualLValue.value)[1]) + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, actualSValue.value, actualLValue.value)[2]);
+                actualHexColor.value = "#" + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, 100, 100)[0]) + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, 100, 100)[1]) + hexStringValue(HSVtoRGB(actualColorNumberHSV.value, 100, 100)[2]);
+            };
+            
+            function HSVtoRGB(h, s, v) {
+                var r, g, b;
+                var i;
+                var f, p, q, t;
+                
+                h = Math.max(0, Math.min(360, h));
+                s = Math.max(0, Math.min(100, s));
+                v = Math.max(0, Math.min(100, v));
+                
+            
+                s /= 100;
+                v /= 100;
+                
+                if(s == 0) {
+                    r = g = b = v;
+                    return [
+                        Math.round(r * 255), 
+                        Math.round(g * 255), 
+                        Math.round(b * 255)
+                    ];
+                }
+                
+                h /= 60; 
+                i = Math.floor(h);
+                f = h - i;
+                p = v * (1 - s);
+                q = v * (1 - s * f);
+                t = v * (1 - s * (1 - f));
+                
+                switch(i) {
+                    case 0:
+                        r = v;
+                        g = t;
+                        b = p;
+                        break;
+                
+                    case 1:
+                        r = q;
+                        g = v;
+                        b = p;
+                        break;
+                
+                    case 2:
+                        r = p;
+                        g = v;
+                        b = t;
+                        break;
+                
+                    case 3:
+                        r = p;
+                        g = q;
+                        b = v;
+                        break;
+                
+                    case 4:
+                        r = t;
+                        g = p;
+                        b = v;
+                        break;
+                
+                    default: 
+                        r = v;
+                        g = p;
+                        b = q;
+                }
+                
+                return [
+                    Math.round(r * 255), 
+                    Math.round(g * 255), 
+                    Math.round(b * 255)
+                ];
+            }
+
+            module.exports = {
+                actualSValue: actualSValue, 
+                actualLValue: actualLValue, 
+                actualColorNumberHSV: actualColorNumberHSV, 
+                colorPositionX: colorPositionX, 
+                colorPositionY: colorPositionY,  
+                actualHexColor: actualHexColor,  
+                actualHexColorOutput: actualHexColorOutput,  
+                clickedColor: clickedColor,  
+                changeColorHSV: changeColorHSV
+            };
+        </JavaScript>
+ 
+        <StackPanel Alignment="Center" Width="90%" ItemSpacing="20" Padding="20">
+            <Rectangle CornerRadius="10" Color="White" Layer="Background"/>
+        
+            <Text Value="H: {actualColorNumberHSV} - S: {actualSValue} - L: {actualLValue}"/>
+
+            <StackPanel Alignment="Center" Orientation="Horizontal" ItemSpacing="20">   
+                <Rectangle CornerRadius="10" Color="{actualHexColorOutput}" Size="30" Margin="0, 10">
+                    <DropShadow />
+                </Rectangle>
+                <Text TextAlignment="Center" Width="80" Alignment="VerticalCenter" Value="{actualHexColorOutput}"/>
+            </StackPanel>
+
+            <Panel Size="240" Clicked="{clickedColor}">
+                <Rectangle Layer="Background">
+                    <LinearGradient Interpolation="Smooth">
+                            <GradientStop  Offset="0" Color="#0000"/>
+                            <GradientStop  Offset="1" Color="#111" />  
+                    </LinearGradient>
+                </Rectangle>
+                <Rectangle Layer="Background">
+                    <LinearGradient AngleDegrees="0">
+                                <GradientStop  Offset="0" Color="#0000" />
+                                <GradientStop  Offset="1" Color="{actualHexColor}" /> 
+                        </LinearGradient>
+                </Rectangle>
+                <Rectangle Layer="Background">
+                    <LinearGradient>
+                            <GradientStop  Offset="0" Color="#fff"/>
+                            <GradientStop  Offset="1" Color="#0000" />  
+                    </LinearGradient>
+                </Rectangle>
+                <Circle ux:Name="circle" Size="15" Color="#0000" X="{colorPositionX}" Y="{colorPositionY}"> 
+                    <Stroke Color="White" Width="3"/>
+                    <Stroke Color="Black" Width="1"/>
+                    <Stroke Color="Black" Offset="-3" Width="1"/>
+                </Circle>
+            </Panel>
+            <RangeControl ValueChanged="{changeColorHSV}" Padding="2,0" Value="{actualColorNumberHSV}" Maximum="360" UserStep="1" >
+                <LinearRangeBehavior/>
+                <Panel Height="22">
+                    <Rectangle Anchor="50%,50%" ux:Name="thumb2" Alignment="Left" Color="#0000" Size="10,28" HitTestMode="LocalBoundsAndChildren">
+                        <Stroke Color="White" Width="3"/>
+                        <Stroke Color="Black" Width="1"/>
+                        <Stroke Color="Black" Offset="-3" Width="1"/>
+                    </Rectangle>
+                </Panel>
+                <Rectangle Layer="Background">
+                    <LinearGradient AngleDegrees="0">
+                                        <GradientStop Offset="0" Color="#ff0000" /> 
+                                        <GradientStop Offset=".166" Color="#ffff00" /> 
+                                        <GradientStop Offset=".332" Color="#00ff00" /> 
+                                        <GradientStop Offset=".498" Color="#00ffff" /> 
+                                        <GradientStop Offset=".664" Color="#0000ff" /> 
+                                        <GradientStop Offset=".83" Color="#ff00ff" /> 
+                                        <GradientStop Offset="1" Color="#ff0000" />           
+                            </LinearGradient> 
+                        </Rectangle>
+                <ProgressAnimation>
+                    <Move Target="thumb2" X="1" RelativeTo="ParentSize" />
+                </ProgressAnimation>
+            </RangeControl>
+        
+            <Button Text="Apply" Clicked="{applyColor}" Size="50" />
+        </StackPanel>
+    </StackPanel>
+</Panel>

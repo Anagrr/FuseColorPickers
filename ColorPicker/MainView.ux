@@ -1,0 +1,14 @@
+<App Model="/MainView">
+    <Rectangle Color="{appColor}" Layer="Background"/>
+
+    <PageControl>
+        <DockPanel>
+            <Text Value="Pallet Color Picker" FontSize="25" TextAlignment="Center" Dock="Top" Margin="0,35,0,0"/>
+            <PalleteColorPicker />
+        </DockPanel>
+        <DockPanel>
+            <Text Value="Slider Color Picker" FontSize="25" TextAlignment="Center" Dock="Top" Margin="0,35,0,0"/>
+            <RgbSliderColorPicker Value="{appColor}"/>
+        </DockPanel>
+    </PageControl>
+</App>
