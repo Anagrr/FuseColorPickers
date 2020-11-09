@@ -1,14 +1,18 @@
 <App Model="/MainView">
+    <Text ux:Class="Header" FontSize="25" TextAlignment="Center" Color="White">
+        <DropShadow Color="Black" />
+    </Text>
     <Rectangle Color="{appColor}" Layer="Background"/>
 
-    <PageControl>
-        <DockPanel>
-            <Text Value="Pallet Color Picker" FontSize="25" TextAlignment="Center" Dock="Top" Margin="0,35,0,0"/>
-            <PalleteColorPicker />
-        </DockPanel>
-        <DockPanel>
-            <Text Value="Slider Color Picker" FontSize="25" TextAlignment="Center" Dock="Top" Margin="0,35,0,0"/>
+    <PageControl>        
+        <StackPanel ItemSpacing="30" Alignment="Center" Width="100%">
+            <Header Value="Slider Color Pickers" />
             <RgbSliderColorPicker Value="{appColor}"/>
-        </DockPanel>
+            <HSLSliderColorPicker Value="{appColor}" />
+        </StackPanel>
+        <!-- <DockPanel>
+            <Header Value="Pallet Color Picker" />
+            <PalleteColorPicker />
+        </DockPanel> -->
     </PageControl>
 </App>

@@ -1,0 +1,26 @@
+<Panel ux:Class="HSLSliderColorPicker" Model="HSLSliderColorPicker/HSLSliderColorPicker">
+    <string ux:Property="Value" />
+
+    <StackPanel Alignment="Center" Width="90%" ItemSpacing="20" Padding="0,0,0,20">
+        <Rectangle CornerRadius="10" Color="White" Layer="Background">
+            <Stroke Color="Black"/>
+        </Rectangle>
+        
+        <CP.HexColorDisplay Color="{ReadProperty Value}"/>
+        <CP.SliderNoBackground ColorLetter="H" MaxValue="360" Value="{H}" ValueChanged="{valueChanged}">
+            <Rectangle Layer="Background">
+                <LinearGradient StartPoint="0,0" EndPoint="1,0" Interpolation="Smooth">
+                    <GradientStop Offset="0" Color="#ff0000"/>
+                    <GradientStop Offset=".166666" Color="#ffff00"/>
+                    <GradientStop Offset=".333332" Color="#00ff00"/>
+                    <GradientStop Offset=".5" Color="#00ffff"/>
+                    <GradientStop Offset=".66666" Color="#0000ff"/>
+                    <GradientStop Offset="0.83333" Color="#ff00ff"/>
+                    <GradientStop Offset="1" Color="#ff0000"/>
+                </LinearGradient>
+            </Rectangle>
+        </CP.SliderNoBackground>
+        <CP.Slider ColorLetter="S" MaxValue="1" Value="{S}" StartColor="#fff" EndColor="{ReadProperty Value}" ValueChanged="{valueChanged}"/>
+        <CP.Slider ColorLetter="V" MaxValue="1" Value="{V}" StartColor="#000" EndColor="{ReadProperty Value}" ValueChanged="{valueChanged}"/>
+    </StackPanel>
+</Panel>

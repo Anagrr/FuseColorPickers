@@ -1,13 +1,14 @@
 <Panel ux:Class="RgbSliderColorPicker" Model="RgbSliderColorPicker/RgbSliderColorPicker">
-    <float4 ux:Property="Value" />
-    <string ux:Property="ValueString" />
+    <string ux:Property="Value" />
 
     <StackPanel Alignment="Center" Width="90%" ItemSpacing="20" Padding="0,0,0,20">
-        <Rectangle CornerRadius="10" Color="White" Layer="Background"/>
+        <Rectangle CornerRadius="10" Color="White" Layer="Background">
+            <Stroke Color="Black"/>
+        </Rectangle>
         
-        <CP.HexColorDisplay HexColor="{hexRGB}" HexColorString="{hexRGB}"/>
-        <CP.Slider ColorLetter="R" MaxValue="255" Value="{R}" StartColor="{gradientR.start}" EndColor="{gradientR.end}" ValueChanged="{valueChanged}"/>
-        <CP.Slider ColorLetter="G" MaxValue="255" Value="{G}" StartColor="{gradientG.start}" EndColor="{gradientG.end}" ValueChanged="{valueChanged}"/>
-        <CP.Slider ColorLetter="B" MaxValue="255" Value="{B}" StartColor="{gradientB.start}" EndColor="{gradientB.end}" ValueChanged="{valueChanged}"/>
+        <CP.HexColorDisplay Color="{ReadProperty Value}"/>
+        <CP.Slider ColorLetter="R" MaxValue="1" Value="{R}" StartColor="{gradientR.start}" EndColor="{gradientR.end}" ValueChanged="{valueChanged}"/>
+        <CP.Slider ColorLetter="G" MaxValue="1" Value="{G}" StartColor="{gradientG.start}" EndColor="{gradientG.end}" ValueChanged="{valueChanged}"/>
+        <CP.Slider ColorLetter="B" MaxValue="1" Value="{B}" StartColor="{gradientB.start}" EndColor="{gradientB.end}" ValueChanged="{valueChanged}"/>
     </StackPanel>
 </Panel>

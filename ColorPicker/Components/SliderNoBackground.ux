@@ -1,0 +1,24 @@
+<Container ux:Class="CP.SliderNoBackground" Subtree="innerPanel">
+    <DockPanel  Padding="15,5" ux:Binding="Children">
+        <string ux:Property="ColorLetter"/>
+        <double ux:Property="Value" />
+        <double ux:Property="MaxValue" />
+        <object ux:Property="ValueChanged"/>
+
+        <Text Dock="Left" Alignment="VerticalCenter" Value="{ReadProperty ColorLetter}"/>
+        <RangeControl Minimum="0" Maximum="{ReadProperty MaxValue}" Margin="10,0" Padding="5,0" Value="{Property Value}" ValueChanged="{Property ValueChanged}">
+            <LinearRangeBehavior/>
+            <Panel Height="22">
+                <Rectangle Anchor="50%,50%" ux:Name="thumb2" Alignment="Left" Color="#0000" Size="10,28" HitTestMode="LocalBoundsAndChildren">
+                    <Stroke Color="White" Width="3"/>
+                    <Stroke Color="Black" Width="1"/>
+                    <Stroke Color="Black" Offset="-3" Width="1"/>
+                </Rectangle>
+            </Panel>
+            <Panel ux:Name="innerPanel" Layer="Background"/>
+            <ProgressAnimation>
+                <Move Target="thumb2" X="1" RelativeTo="ParentSize" />
+            </ProgressAnimation>
+        </RangeControl>
+    </DockPanel>
+</Container>

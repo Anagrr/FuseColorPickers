@@ -1,30 +1,29 @@
 <DockPanel ux:Class="CP.Slider" Padding="15,5">
     <string ux:Property="ColorLetter"/>
-    <int ux:Property="Value" />
-    <int ux:Property="MaxValue" />
+    <double ux:Property="Value" />
+    <double ux:Property="MaxValue" />
     <float4 ux:Property="StartColor"/>
     <float4 ux:Property="EndColor"/>
     <object ux:Property="ValueChanged"/>
 
     <Text Dock="Left" Alignment="VerticalCenter" Value="{ReadProperty ColorLetter}"/>
-    <RangeControl Minimum="0" Maximum="{ReadProperty MaxValue}" Margin="10,0" Padding="5,0" Value="{WriteProperty Value}" UserStep="1" ValueChanged="{Property ValueChanged}">
-            <LinearRangeBehavior/>
-            <Panel Height="22">
-                <Rectangle Anchor="50%,50%" ux:Name="thumb2" Alignment="Left" Color="#0000" Size="10,28" HitTestMode="LocalBoundsAndChildren">
-                    <Stroke Color="White" Width="3"/>
-                    <Stroke Color="Black" Width="1"/>
-                    <Stroke Color="Black" Offset="-3" Width="1"/>
-                </Rectangle>
-            </Panel>
-            <Rectangle Layer="Background">
-                    <LinearGradient StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Offset="0" Color="{ReadProperty StartColor}" />
-                    <GradientStop Offset="1" Color="{ReadProperty EndColor}" />
-                </LinearGradient>
+    <RangeControl Minimum="0" Maximum="{ReadProperty MaxValue}" Margin="10,0" Padding="5,0" Value="{Property Value}" ValueChanged="{Property ValueChanged}">
+        <LinearRangeBehavior/>
+        <Panel Height="22">
+            <Rectangle Anchor="50%,50%" ux:Name="thumb2" Alignment="Left" Color="#0000" Size="10,28" HitTestMode="LocalBoundsAndChildren">
+                <Stroke Color="White" Width="3"/>
+                <Stroke Color="Black" Width="1"/>
+                <Stroke Color="Black" Offset="-3" Width="1"/>
             </Rectangle>
-            <ProgressAnimation>
-                <Move Target="thumb2" X="1" RelativeTo="ParentSize" />
-            </ProgressAnimation>
-        </RangeControl>
-    <Text Dock="Right" Width="40" TextAlignment="Center" Alignment="VerticalCenter" Value="{ReadProperty Value}"/>
+        </Panel>
+        <Rectangle Layer="Background">
+            <LinearGradient StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Offset="0" Color="{ReadProperty StartColor}" />
+                <GradientStop Offset="1" Color="{ReadProperty EndColor}" />
+            </LinearGradient>
+        </Rectangle>
+        <ProgressAnimation>
+            <Move Target="thumb2" X="1" RelativeTo="ParentSize" />
+        </ProgressAnimation>
+    </RangeControl>
 </DockPanel>
