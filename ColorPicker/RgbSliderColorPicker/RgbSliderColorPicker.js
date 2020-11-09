@@ -1,42 +1,38 @@
+import { Color } from "../Models/Color";
+
 export default class RgbSliderColorPicker {
     constructor() {
-        this.R = 0.5;
-        this.G = 0.2;
-        this.B = 0.6;
-        this.Value = this.colorHex;
+        this.color = new Color();
+        this.Value = this.color.colorHex;
     }
 
-    get colorHex(){
-        return `#${this.toHex(this.R)}${this.toHex(this.G)}${this.toHex(this.B)}`;
+    init() {
+        this.color.fromHex(this.Value);
+    }
+
+    valueChanged() {
+        this.color.RgbChanged();
+        this.Value = this.color.colorHex;
     }
 
     get gradientR (){
         return {
-            start: `#00${this.toHex(this.G)}${this.toHex(this.B)}`,
-            end: `#ff${this.toHex(this.G)}${this.toHex(this.B)}`
+            start: `#00${this.color.hexG}${this.color.hexB}`,
+            end: `#ff${this.color.hexG}${this.color.hexB}`
         }
     }
 
     get gradientG (){
         return {
-            start: `#${this.toHex(this.R)}00${this.toHex(this.B)}`,
-            end: `#${this.toHex(this.R)}ff${this.toHex(this.B)}`
+            start: `#${this.color.hexR}00${this.color.hexB}`,
+            end: `#${this.color.hexR}ff${this.color.hexB}`
         }
     }
 
     get gradientB (){
         return {
-            start: `#${this.toHex(this.R)}${this.toHex(this.G)}00`,
-            end: `#${this.toHex(this.R)}${this.toHex(this.G)}ff`
+            start: `#${this.color.hexR}${this.color.hexG}00`,
+            end: `#${this.color.hexR}${this.color.hexG}ff`
         }
-    }
-
-    toHex(number) {
-        number = Math.round(number * 255);
-        return number < 16 ? "0" + number.toString(16) : number.toString(16);
-    }
-
-    valueChanged() {
-        this.Value = this.colorHex;
     }
 }
