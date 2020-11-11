@@ -1,0 +1,25 @@
+<Panel ux:Class="RadialSliderRainbowBackground" Layer="Background">
+    <Circle ux:Class="Slice" StartAngleDegrees="0" EndAngleDegrees="60">
+        <int ux:Property="RotationDegrees"/>
+        <float4 ux:Property="StartColor" />
+        <double ux:Property="StartColorOffset" />
+        <float4 ux:Property="EndColor" />
+        <double ux:Property="EndColorOffset" />
+        <double ux:Property="GradientAngleDegrees" />
+
+        <Stroke Width="10">
+            <LinearGradient AngleDegrees="{ReadProperty GradientAngleDegrees}" Interpolation="Smooth">
+                <GradientStop Offset="{ReadProperty StartColorOffset}" Color="{ReadProperty StartColor}"/>
+                <GradientStop Offset="{ReadProperty EndColorOffset}" Color="{ReadProperty EndColor}"/>
+            </LinearGradient>
+        </Stroke>
+        <Rotation Degrees="{ReadProperty RotationDegrees}" />
+    </Circle>
+
+    <Slice GradientAngleDegrees="175" StartColor="#ff0000" EndColor="#ffff00" StartColorOffset="0" EndColorOffset="0.3"/>
+    <Slice GradientAngleDegrees="180" StartColor="#ffff00" EndColor="#00ff00" StartColorOffset="0" EndColorOffset="0.35" RotationDegrees="60"/>
+    <Slice GradientAngleDegrees="178" StartColor="#00ff00" EndColor="#00ffff" StartColorOffset="0" EndColorOffset="0.25" RotationDegrees="120"/>
+    <Slice GradientAngleDegrees="180" StartColor="#00ffff" EndColor="#0000ff" StartColorOffset="0.025" EndColorOffset="0.25" RotationDegrees="180"/>
+    <Slice GradientAngleDegrees="175" StartColor="#0000ff" EndColor="#ff00ff" StartColorOffset="0" EndColorOffset="0.275" RotationDegrees="240"/>
+    <Slice GradientAngleDegrees="175" StartColor="#ff00ff" EndColor="#ff0000" StartColorOffset="0" EndColorOffset="0.275" RotationDegrees="300"/>
+</Panel>

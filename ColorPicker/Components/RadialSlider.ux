@@ -1,0 +1,21 @@
+<Panel ux:Class="CP.RadialSlider">
+    <string ux:Property="ColorLetter"/>
+    <double ux:Property="Value" />
+    <double ux:Property="MaxValue" />
+    <object ux:Property="ValueChanged"/>
+    <double ux:Property="MinValue" />
+
+    <RangeControl2D ux:Name="rangeControl" Minimum="{ReadProperty MinValue}" Maximum="{ReadProperty MaxValue}" Value="{Property Value}" ValueChanged="{Property ValueChanged}">
+        <CircularRangeBehavior/>                                    
+        <Panel ux:Name="thumb" >
+            <Rectangle Layer="Background" Alignment="Right" X="7" Color="#0000" Size="25,10" HitTestMode="LocalBoundsAndChildren">
+                <Stroke Color="White" Width="3"/>
+                <Stroke Color="Black" Width="1"/>
+                <Stroke Color="Black" Offset="-3" Width="1"/>
+            </Rectangle>
+        </Panel>
+        <RangeAnimation Minimum="0" Maximum="{ReadProperty MaxValue}" Value="{ReadProperty rangeControl.ValueX}">
+            <Rotate Target="thumb" Degrees="360" />
+        </RangeAnimation>
+    </RangeControl2D>
+</Panel>

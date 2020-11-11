@@ -6,6 +6,10 @@
 
     <PageControl>
         <StackPanel ItemSpacing="30" Alignment="Center" Width="100%">
+            <Header Value="Radial Color Picker"/>
+            <RadialColorPicker Value="{appColor}" />
+        </StackPanel>
+        <StackPanel ItemSpacing="30" Alignment="Center" Width="100%">
             <Header Value="RGB Slider Color Picker"/>
             <RgbSliderColorPicker Value="{appColor}"/>
         </StackPanel>
@@ -13,6 +17,7 @@
             <Header Value="HSV Slider Color Picker"/>
             <HSVSliderColorPicker Value="{appColor}" />
         </StackPanel>
+        
         <!-- <DockPanel>
             <Header Value="Pallet Color Picker" />
             <PalleteColorPicker />
